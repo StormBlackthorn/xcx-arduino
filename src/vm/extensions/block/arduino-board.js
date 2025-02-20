@@ -196,10 +196,10 @@ class ArduinoBoard extends EventEmitter{
      * @param {object} options - serial port options
      * @returns {Promise<ArduinoBoard>} a Promise which resolves a connected Arduino board or reject with reason
      */
-    connectSerial (options) {
+    async connectSerial (options) {
         if (this.firmata) return Promise.resolve(this); // already opened
         this.state = 'portRequesting';
-        const request = this.openSerialPort(options)
+        const request = await this.openSerialPort(options)
             .then(port => {
                 const firmata = new Firmata(port, {reportVersionTimeout: 0});
                 this.setupFirmata(firmata);
