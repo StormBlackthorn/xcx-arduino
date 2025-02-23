@@ -1,14 +1,14 @@
 {
   "en": {
     "xcxArduino.entry.name": "Arduino",
-    "xcxArduino.entry.description": "Play with Arduino via Firmata"
+    "xcxArduino.entry.description": "Play with Arduino"
   },
   "ja": {
     "xcxArduino.entry.name": "Arduino",
-    "xcxArduino.entry.description": "FirmataでつないだArduinoで遊ぶ"
+    "xcxArduino.entry.description": "Arduinoで遊ぶ"
   },
   "ja-Hira": {
     "xcxArduino.entry.name": "Arduino",
-    "xcxArduino.entry.description": "FirmataでつないだArduinoであそぶ"
+    "xcxArduino.entry.description": "Arduinoであそぶ"
   }
 }

@@ -8,18 +8,18 @@ var img$1 = "data:image/svg+xml,%3c%3fxml version='1.0' encoding='UTF-8' standal
 
 var en$1 = {
 	"xcxArduino.entry.name": "Arduino",
-	"xcxArduino.entry.description": "Play with Arduino via Firmata"
+	"xcxArduino.entry.description": "Play with Arduino"
 };
 var ja$1 = {
 	"xcxArduino.entry.name": "Arduino",
-	"xcxArduino.entry.description": "FirmataでつないだArduinoで遊ぶ"
+	"xcxArduino.entry.description": "Arduinoで遊ぶ"
 };
 var translations$1 = {
 	en: en$1,
 	ja: ja$1,
 	"ja-Hira": {
 	"xcxArduino.entry.name": "Arduino",
-	"xcxArduino.entry.description": "FirmataでつないだArduinoであそぶ"
+	"xcxArduino.entry.description": "Arduinoであそぶ"
 }
 };
 
@@ -52,11 +52,12 @@ var entry = {
   insetIconURL: img$3,
   get description() {
     return formatMessage$1({
-      defaultMessage: 'an extension for Xcratch',
+      defaultMessage: 'Play with Arduino',
       description: 'Description for this extension',
       id: 'xcxArduino.entry.description'
     });
   },
+  tags: ['device', 'hardware', 'arduino', 'firmata'],
   featured: true,
   disabled: false,
   bluetoothRequired: false,
@@ -226,10 +227,8 @@ var ArgumentType = {
 var argumentType = ArgumentType;
 var ArgumentType$1 = /*@__PURE__*/getDefaultExportFromCjs(argumentType);
 
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
+function _classCallCheck(a, n) {
+  if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
 }
 
 function _typeof$1(o) {
@@ -255,24 +254,19 @@ function toPrimitive(t, r) {
 
 function toPropertyKey(t) {
   var i = toPrimitive(t, "string");
-  return "symbol" == _typeof$1(i) ? i : String(i);
+  return "symbol" == _typeof$1(i) ? i : i + "";
 }
 
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, toPropertyKey(descriptor.key), descriptor);
+function _defineProperties(e, r) {
+  for (var t = 0; t < r.length; t++) {
+    var o = r[t];
+    o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, toPropertyKey(o.key), o);
   }
 }
-function _createClass(Constructor, protoProps, staticProps) {
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  Object.defineProperty(Constructor, "prototype", {
-    writable: false
-  });
-  return Constructor;
+function _createClass(e, r, t) {
+  return t && _defineProperties(e, t), Object.defineProperty(e, "prototype", {
+    writable: !1
+  }), e;
 }
 
 var Color$1 = /*#__PURE__*/function () {
@@ -11697,33 +11691,56 @@ var ArduinoBoard = /*#__PURE__*/function (_EventEmitter) {
     )
   }, {
     key: "connectSerial",
-    value: function connectSerial(options) {
-      var _this3 = this;
-      if (this.firmata) return Promise.resolve(this); // already opened
-      this.state = 'portRequesting';
-      var request = this.openSerialPort(options).then(function (port) {
-        var firmata = new Firmata(port, {
-          reportVersionTimeout: 0
-        });
-        _this3.setupFirmata(firmata);
-        return new Promise(function (resolve) {
-          firmata.once('ready', function () {
-            if (_this3.firmata !== firmata) return;
-            _this3.onBoarReady();
-            resolve(_this3);
-          });
-        });
-      });
-      // return Promise.race([request, timeoutReject(this.connectingWaitingTime)])
-      return request.catch(function (reason) {
-        _this3.releaseBoard();
-        return Promise.reject(reason);
-      });
-    }
-
+    value: (function () {
+      var _connectSerial = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime.mark(function _callee2(options) {
+        var _this3 = this;
+        var request;
+        return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              if (!this.firmata) {
+                _context2.next = 2;
+                break;
+              }
+              return _context2.abrupt("return", Promise.resolve(this));
+            case 2:
+              // already opened
+              this.state = 'portRequesting';
+              _context2.next = 5;
+              return this.openSerialPort(options).then(function (port) {
+                var firmata = new Firmata(port, {
+                  reportVersionTimeout: 0
+                });
+                _this3.setupFirmata(firmata);
+                return new Promise(function (resolve) {
+                  firmata.once('ready', function () {
+                    if (_this3.firmata !== firmata) return;
+                    _this3.onBoarReady();
+                    resolve(_this3);
+                  });
+                });
+              });
+            case 5:
+              request = _context2.sent;
+              return _context2.abrupt("return", request.catch(function (reason) {
+                _this3.releaseBoard();
+                return Promise.reject(reason);
+              }));
+            case 7:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2, this);
+      }));
+      function connectSerial(_x2) {
+        return _connectSerial.apply(this, arguments);
+      }
+      return connectSerial;
+    }()
     /**
      * Called when a board was ready.
      */
+    )
   }, {
     key: "onBoarReady",
     value: function onBoarReady() {

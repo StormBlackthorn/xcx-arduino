@@ -31,11 +31,12 @@ const entry = {
     insetIconURL: insetIconURL,
     get description () {
         return formatMessage({
-            defaultMessage: 'an extension for Xcratch',
+            defaultMessage: 'Play with Arduino',
             description: 'Description for this extension',
             id: 'xcxArduino.entry.description'
         });
     },
+    tags: ['device', 'hardware', 'arduino', 'firmata'],
     featured: true,
     disabled: false,
     bluetoothRequired: false,
