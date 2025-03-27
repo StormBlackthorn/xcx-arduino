@@ -71,44 +71,44 @@ var entry = {
   translationMap: translations$1
 };
 
-function _classCallCheck$1(a, n) {
+function _classCallCheck(a, n) {
   if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
 }
 
-function _typeof$2(o) {
+function _typeof$1(o) {
   "@babel/helpers - typeof";
 
-  return _typeof$2 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+  return _typeof$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
     return typeof o;
   } : function (o) {
     return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-  }, _typeof$2(o);
+  }, _typeof$1(o);
 }
 
-function toPrimitive$1(t, r) {
-  if ("object" != _typeof$2(t) || !t) return t;
+function toPrimitive(t, r) {
+  if ("object" != _typeof$1(t) || !t) return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
     var i = e.call(t, r || "default");
-    if ("object" != _typeof$2(i)) return i;
+    if ("object" != _typeof$1(i)) return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
   return ("string" === r ? String : Number)(t);
 }
 
-function toPropertyKey$1(t) {
-  var i = toPrimitive$1(t, "string");
-  return "symbol" == _typeof$2(i) ? i : i + "";
+function toPropertyKey(t) {
+  var i = toPrimitive(t, "string");
+  return "symbol" == _typeof$1(i) ? i : i + "";
 }
 
-function _defineProperties$1(e, r) {
+function _defineProperties(e, r) {
   for (var t = 0; t < r.length; t++) {
     var o = r[t];
-    o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, toPropertyKey$1(o.key), o);
+    o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, toPropertyKey(o.key), o);
   }
 }
-function _createClass$1(e, r, t) {
-  return r && _defineProperties$1(e.prototype, r), t && _defineProperties$1(e, t), Object.defineProperty(e, "prototype", {
+function _createClass(e, r, t) {
+  return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", {
     writable: !1
   }), e;
 }
@@ -226,48 +226,6 @@ var ArgumentType = {
 };
 var argumentType = ArgumentType;
 var ArgumentType$1 = /*@__PURE__*/getDefaultExportFromCjs(argumentType);
-
-function _classCallCheck(a, n) {
-  if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
-}
-
-function _typeof$1(o) {
-  "@babel/helpers - typeof";
-
-  return _typeof$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
-    return typeof o;
-  } : function (o) {
-    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-  }, _typeof$1(o);
-}
-
-function toPrimitive(t, r) {
-  if ("object" != _typeof$1(t) || !t) return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r);
-    if ("object" != _typeof$1(i)) return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return (String )(t);
-}
-
-function toPropertyKey(t) {
-  var i = toPrimitive(t, "string");
-  return "symbol" == _typeof$1(i) ? i : i + "";
-}
-
-function _defineProperties(e, r) {
-  for (var t = 0; t < r.length; t++) {
-    var o = r[t];
-    o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, toPropertyKey(o.key), o);
-  }
-}
-function _createClass(e, r, t) {
-  return t && _defineProperties(e, t), Object.defineProperty(e, "prototype", {
-    writable: !1
-  }), e;
-}
 
 var Color$1 = /*#__PURE__*/function () {
   function Color() {
@@ -512,9 +470,9 @@ var Color$1 = /*#__PURE__*/function () {
     }
   }]);
 }();
-var color$3 = Color$1;
+var color = Color$1;
 
-var Color = color$3;
+var Color = color;
 
 /**
  * @fileoverview
@@ -765,530 +723,6 @@ var Cast = /*#__PURE__*/function () {
 var cast = Cast;
 var Cast$1 = /*@__PURE__*/getDefaultExportFromCjs(cast);
 
-var web = {exports: {}};
-
-var minilog$2 = {exports: {}};
-
-function M() {
-  this._events = {};
-}
-M.prototype = {
-  on: function on(ev, cb) {
-    this._events || (this._events = {});
-    var e = this._events;
-    (e[ev] || (e[ev] = [])).push(cb);
-    return this;
-  },
-  removeListener: function removeListener(ev, cb) {
-    var e = this._events[ev] || [],
-      i;
-    for (i = e.length - 1; i >= 0 && e[i]; i--) {
-      if (e[i] === cb || e[i].cb === cb) {
-        e.splice(i, 1);
-      }
-    }
-  },
-  removeAllListeners: function removeAllListeners(ev) {
-    if (!ev) {
-      this._events = {};
-    } else {
-      this._events[ev] && (this._events[ev] = []);
-    }
-  },
-  listeners: function listeners(ev) {
-    return this._events ? this._events[ev] || [] : [];
-  },
-  emit: function emit(ev) {
-    this._events || (this._events = {});
-    var args = Array.prototype.slice.call(arguments, 1),
-      i,
-      e = this._events[ev] || [];
-    for (i = e.length - 1; i >= 0 && e[i]; i--) {
-      e[i].apply(this, args);
-    }
-    return this;
-  },
-  when: function when(ev, cb) {
-    return this.once(ev, cb, true);
-  },
-  once: function once(ev, cb, when) {
-    if (!cb) return this;
-    function c() {
-      if (!when) this.removeListener(ev, c);
-      if (cb.apply(this, arguments) && when) this.removeListener(ev, c);
-    }
-    c.cb = cb;
-    this.on(ev, c);
-    return this;
-  }
-};
-M.mixin = function (dest) {
-  var o = M.prototype,
-    k;
-  for (k in o) {
-    o.hasOwnProperty(k) && (dest.prototype[k] = o[k]);
-  }
-};
-var microee$1 = M;
-
-var microee = microee$1;
-
-// Implements a subset of Node's stream.Transform - in a cross-platform manner.
-function Transform$5() {}
-microee.mixin(Transform$5);
-
-// The write() signature is different from Node's
-// --> makes it much easier to work with objects in logs.
-// One of the lessons from v1 was that it's better to target
-// a good browser rather than the lowest common denominator
-// internally.
-// If you want to use external streams, pipe() to ./stringify.js first.
-Transform$5.prototype.write = function (name, level, args) {
-  this.emit('item', name, level, args);
-};
-Transform$5.prototype.end = function () {
-  this.emit('end');
-  this.removeAllListeners();
-};
-Transform$5.prototype.pipe = function (dest) {
-  var s = this;
-  // prevent double piping
-  s.emit('unpipe', dest);
-  // tell the dest that it's being piped to
-  dest.emit('pipe', s);
-  function onItem() {
-    dest.write.apply(dest, Array.prototype.slice.call(arguments));
-  }
-  function onEnd() {
-    !dest._isStdio && dest.end();
-  }
-  s.on('item', onItem);
-  s.on('end', onEnd);
-  s.when('unpipe', function (from) {
-    var match = from === dest || typeof from == 'undefined';
-    if (match) {
-      s.removeListener('item', onItem);
-      s.removeListener('end', onEnd);
-      dest.emit('unpipe');
-    }
-    return match;
-  });
-  return dest;
-};
-Transform$5.prototype.unpipe = function (from) {
-  this.emit('unpipe', from);
-  return this;
-};
-Transform$5.prototype.format = function (dest) {
-  throw new Error(['Warning: .format() is deprecated in Minilog v2! Use .pipe() instead. For example:', 'var Minilog = require(\'minilog\');', 'Minilog', '  .pipe(Minilog.backends.console.formatClean)', '  .pipe(Minilog.backends.console);'].join('\n'));
-};
-Transform$5.mixin = function (dest) {
-  var o = Transform$5.prototype,
-    k;
-  for (k in o) {
-    o.hasOwnProperty(k) && (dest.prototype[k] = o[k]);
-  }
-};
-var transform = Transform$5;
-
-// default filter
-var Transform$4 = transform;
-var levelMap = {
-  debug: 1,
-  info: 2,
-  warn: 3,
-  error: 4
-};
-function Filter() {
-  this.enabled = true;
-  this.defaultResult = true;
-  this.clear();
-}
-Transform$4.mixin(Filter);
-
-// allow all matching, with level >= given level
-Filter.prototype.allow = function (name, level) {
-  this._white.push({
-    n: name,
-    l: levelMap[level]
-  });
-  return this;
-};
-
-// deny all matching, with level <= given level
-Filter.prototype.deny = function (name, level) {
-  this._black.push({
-    n: name,
-    l: levelMap[level]
-  });
-  return this;
-};
-Filter.prototype.clear = function () {
-  this._white = [];
-  this._black = [];
-  return this;
-};
-function test(rule, name) {
-  // use .test for RegExps
-  return rule.n.test ? rule.n.test(name) : rule.n == name;
-}
-Filter.prototype.test = function (name, level) {
-  var i,
-    len = Math.max(this._white.length, this._black.length);
-  for (i = 0; i < len; i++) {
-    if (this._white[i] && test(this._white[i], name) && levelMap[level] >= this._white[i].l) {
-      return true;
-    }
-    if (this._black[i] && test(this._black[i], name) && levelMap[level] <= this._black[i].l) {
-      return false;
-    }
-  }
-  return this.defaultResult;
-};
-Filter.prototype.write = function (name, level, args) {
-  if (!this.enabled || this.test(name, level)) {
-    return this.emit('item', name, level, args);
-  }
-};
-var filter = Filter;
-
-(function (module, exports) {
-  var Transform = transform,
-    Filter = filter;
-  var log = new Transform(),
-    slice = Array.prototype.slice;
-  exports = module.exports = function create(name) {
-    var _o = function o() {
-      log.write(name, undefined, slice.call(arguments));
-      return _o;
-    };
-    _o.debug = function () {
-      log.write(name, 'debug', slice.call(arguments));
-      return _o;
-    };
-    _o.info = function () {
-      log.write(name, 'info', slice.call(arguments));
-      return _o;
-    };
-    _o.warn = function () {
-      log.write(name, 'warn', slice.call(arguments));
-      return _o;
-    };
-    _o.error = function () {
-      log.write(name, 'error', slice.call(arguments));
-      return _o;
-    };
-    _o.log = _o.debug; // for interface compliance with Node and browser consoles
-    _o.suggest = exports.suggest;
-    _o.format = log.format;
-    return _o;
-  };
-
-  // filled in separately
-  exports.defaultBackend = exports.defaultFormatter = null;
-  exports.pipe = function (dest) {
-    return log.pipe(dest);
-  };
-  exports.end = exports.unpipe = exports.disable = function (from) {
-    return log.unpipe(from);
-  };
-  exports.Transform = Transform;
-  exports.Filter = Filter;
-  // this is the default filter that's applied when .enable() is called normally
-  // you can bypass it completely and set up your own pipes
-  exports.suggest = new Filter();
-  exports.enable = function () {
-    if (exports.defaultFormatter) {
-      return log.pipe(exports.suggest) // filter
-      .pipe(exports.defaultFormatter) // formatter
-      .pipe(exports.defaultBackend); // backend
-    }
-    return log.pipe(exports.suggest) // filter
-    .pipe(exports.defaultBackend); // formatter
-  };
-})(minilog$2, minilog$2.exports);
-var minilogExports = minilog$2.exports;
-
-var hex = {
-  black: '#000',
-  red: '#c23621',
-  green: '#25bc26',
-  yellow: '#bbbb00',
-  blue: '#492ee1',
-  magenta: '#d338d3',
-  cyan: '#33bbc8',
-  gray: '#808080',
-  purple: '#708'
-};
-function color$2(fg, isInverse) {
-  if (isInverse) {
-    return 'color: #fff; background: ' + hex[fg] + ';';
-  } else {
-    return 'color: ' + hex[fg] + ';';
-  }
-}
-var util$1 = color$2;
-
-var Transform$3 = transform,
-  color$1 = util$1;
-var colors$1 = {
-    debug: ['cyan'],
-    info: ['purple'],
-    warn: ['yellow', true],
-    error: ['red', true]
-  },
-  logger$2 = new Transform$3();
-logger$2.write = function (name, level, args) {
-  var fn = console.log;
-  if (console[level] && console[level].apply) {
-    fn = console[level];
-    fn.apply(console, ['%c' + name + ' %c' + level, color$1('gray'), color$1.apply(color$1, colors$1[level])].concat(args));
-  }
-};
-
-// NOP, because piping the formatted logs can only cause trouble.
-logger$2.pipe = function () {};
-var color_1 = logger$2;
-
-var Transform$2 = transform,
-  color = util$1,
-  colors = {
-    debug: ['gray'],
-    info: ['purple'],
-    warn: ['yellow', true],
-    error: ['red', true]
-  },
-  logger$1 = new Transform$2();
-logger$1.write = function (name, level, args) {
-  var fn = console.log;
-  if (level != 'debug' && console[level]) {
-    fn = console[level];
-  }
-  var i = 0;
-  if (level != 'info') {
-    for (; i < args.length; i++) {
-      if (typeof args[i] != 'string') break;
-    }
-    fn.apply(console, ['%c' + name + ' ' + args.slice(0, i).join(' '), color.apply(color, colors[level])].concat(args.slice(i)));
-  } else {
-    fn.apply(console, ['%c' + name, color.apply(color, colors[level])].concat(args));
-  }
-};
-
-// NOP, because piping the formatted logs can only cause trouble.
-logger$1.pipe = function () {};
-var minilog$1 = logger$1;
-
-var Transform$1 = transform;
-var newlines = /\n+$/,
-  logger = new Transform$1();
-logger.write = function (name, level, args) {
-  var i = args.length - 1;
-  if (typeof console === 'undefined' || !console.log) {
-    return;
-  }
-  if (console.log.apply) {
-    return console.log.apply(console, [name, level].concat(args));
-  } else if (JSON && JSON.stringify) {
-    // console.log.apply is undefined in IE8 and IE9
-    // for IE8/9: make console.log at least a bit less awful
-    if (args[i] && typeof args[i] == 'string') {
-      args[i] = args[i].replace(newlines, '');
-    }
-    try {
-      for (i = 0; i < args.length; i++) {
-        args[i] = JSON.stringify(args[i]);
-      }
-    } catch (e) {}
-    console.log(args.join(' '));
-  }
-};
-logger.formatters = ['color', 'minilog'];
-logger.color = color_1;
-logger.minilog = minilog$1;
-var console_1 = logger;
-
-var array;
-var hasRequiredArray;
-function requireArray() {
-  if (hasRequiredArray) return array;
-  hasRequiredArray = 1;
-  var Transform = transform,
-    cache = [];
-  var logger = new Transform();
-  logger.write = function (name, level, args) {
-    cache.push([name, level, args]);
-  };
-
-  // utility functions
-  logger.get = function () {
-    return cache;
-  };
-  logger.empty = function () {
-    cache = [];
-  };
-  array = logger;
-  return array;
-}
-
-var localstorage;
-var hasRequiredLocalstorage;
-function requireLocalstorage() {
-  if (hasRequiredLocalstorage) return localstorage;
-  hasRequiredLocalstorage = 1;
-  var Transform = transform,
-    cache = false;
-  var logger = new Transform();
-  logger.write = function (name, level, args) {
-    if (typeof window == 'undefined' || typeof JSON == 'undefined' || !JSON.stringify || !JSON.parse) return;
-    try {
-      if (!cache) {
-        cache = window.localStorage.minilog ? JSON.parse(window.localStorage.minilog) : [];
-      }
-      cache.push([new Date().toString(), name, level, args]);
-      window.localStorage.minilog = JSON.stringify(cache);
-    } catch (e) {}
-  };
-  localstorage = logger;
-  return localstorage;
-}
-
-var jquery_simple;
-var hasRequiredJquery_simple;
-function requireJquery_simple() {
-  if (hasRequiredJquery_simple) return jquery_simple;
-  hasRequiredJquery_simple = 1;
-  var Transform = transform;
-  var cid = new Date().valueOf().toString(36);
-  function AjaxLogger(options) {
-    this.url = options.url || '';
-    this.cache = [];
-    this.timer = null;
-    this.interval = options.interval || 30 * 1000;
-    this.enabled = true;
-    this.jQuery = window.jQuery;
-    this.extras = {};
-  }
-  Transform.mixin(AjaxLogger);
-  AjaxLogger.prototype.write = function (name, level, args) {
-    if (!this.timer) {
-      this.init();
-    }
-    this.cache.push([name, level].concat(args));
-  };
-  AjaxLogger.prototype.init = function () {
-    if (!this.enabled || !this.jQuery) return;
-    var self = this;
-    this.timer = setTimeout(function () {
-      var i,
-        logs = [],
-        ajaxData,
-        url = self.url;
-      if (self.cache.length == 0) return self.init();
-      // Test each log line and only log the ones that are valid (e.g. don't have circular references).
-      // Slight performance hit but benefit is we log all valid lines.
-      for (i = 0; i < self.cache.length; i++) {
-        try {
-          JSON.stringify(self.cache[i]);
-          logs.push(self.cache[i]);
-        } catch (e) {}
-      }
-      if (self.jQuery.isEmptyObject(self.extras)) {
-        ajaxData = JSON.stringify({
-          logs: logs
-        });
-        url = self.url + '?client_id=' + cid;
-      } else {
-        ajaxData = JSON.stringify(self.jQuery.extend({
-          logs: logs
-        }, self.extras));
-      }
-      self.jQuery.ajax(url, {
-        type: 'POST',
-        cache: false,
-        processData: false,
-        data: ajaxData,
-        contentType: 'application/json',
-        timeout: 10000
-      }).success(function (data, status, jqxhr) {
-        if (data.interval) {
-          self.interval = Math.max(1000, data.interval);
-        }
-      }).error(function () {
-        self.interval = 30000;
-      }).always(function () {
-        self.init();
-      });
-      self.cache = [];
-    }, this.interval);
-  };
-  AjaxLogger.prototype.end = function () {};
-
-  // wait until jQuery is defined. Useful if you don't control the load order.
-  AjaxLogger.jQueryWait = function (onDone) {
-    if (typeof window !== 'undefined' && (window.jQuery || window.$)) {
-      return onDone(window.jQuery || window.$);
-    } else if (typeof window !== 'undefined') {
-      setTimeout(function () {
-        AjaxLogger.jQueryWait(onDone);
-      }, 200);
-    }
-  };
-  jquery_simple = AjaxLogger;
-  return jquery_simple;
-}
-
-(function (module, exports) {
-  var Minilog = minilogExports;
-  var oldEnable = Minilog.enable,
-    oldDisable = Minilog.disable,
-    isChrome = typeof navigator != 'undefined' && /chrome/i.test(navigator.userAgent),
-    console = console_1;
-
-  // Use a more capable logging backend if on Chrome
-  Minilog.defaultBackend = isChrome ? console.minilog : console;
-
-  // apply enable inputs from localStorage and from the URL
-  if (typeof window != 'undefined') {
-    try {
-      Minilog.enable(JSON.parse(window.localStorage['minilogSettings']));
-    } catch (e) {}
-    if (window.location && window.location.search) {
-      var match = RegExp('[?&]minilog=([^&]*)').exec(window.location.search);
-      match && Minilog.enable(decodeURIComponent(match[1]));
-    }
-  }
-
-  // Make enable also add to localStorage
-  Minilog.enable = function () {
-    oldEnable.call(Minilog, true);
-    try {
-      window.localStorage['minilogSettings'] = JSON.stringify(true);
-    } catch (e) {}
-    return this;
-  };
-  Minilog.disable = function () {
-    oldDisable.call(Minilog);
-    try {
-      delete window.localStorage.minilogSettings;
-    } catch (e) {}
-    return this;
-  };
-  exports = module.exports = Minilog;
-  exports.backends = {
-    array: requireArray(),
-    browser: Minilog.defaultBackend,
-    localStorage: requireLocalstorage(),
-    jQuery: requireJquery_simple()
-  };
-})(web, web.exports);
-var webExports = web.exports;
-
-var minilog = webExports;
-minilog.enable();
-var log$1 = minilog('vm');
-var log$2 = /*@__PURE__*/getDefaultExportFromCjs(log$1);
-
 var en = {
 	"xcxArduino.name": "Arduino",
 	"xcxArduino.A0": "A0",
@@ -1356,7 +790,7 @@ function _assertThisInitialized(e) {
 }
 
 function _possibleConstructorReturn(t, e) {
-  if (e && ("object" == _typeof$2(e) || "function" == typeof e)) return e;
+  if (e && ("object" == _typeof$1(e) || "function" == typeof e)) return e;
   if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined");
   return _assertThisInitialized(t);
 }
@@ -2226,7 +1660,7 @@ var regenerator = runtime;
 try {
   regeneratorRuntime = runtime;
 } catch (accidentalStrictMode) {
-  if ((typeof globalThis === "undefined" ? "undefined" : _typeof$2(globalThis)) === "object") {
+  if ((typeof globalThis === "undefined" ? "undefined" : _typeof$1(globalThis)) === "object") {
     globalThis.regeneratorRuntime = runtime;
   } else {
     Function("r", "regeneratorRuntime = r")(runtime);
@@ -2265,7 +1699,7 @@ function _toConsumableArray(r) {
 }
 
 function _defineProperty(e, r, t) {
-  return (r = toPropertyKey$1(r)) in e ? Object.defineProperty(e, r, {
+  return (r = toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
     value: t,
     enumerable: !0,
     configurable: !0,
@@ -4890,7 +4324,7 @@ var Transport = null;
 var Firmata$1 = /*#__PURE__*/function (_EventEmitter) {
   function Firmata(port, options, callback) {
     var _this;
-    _classCallCheck$1(this, Firmata);
+    _classCallCheck(this, Firmata);
     _this = _callSuper$3(this, Firmata);
     if (typeof options === "function" || typeof options === "undefined") {
       callback = options;
@@ -5003,7 +4437,7 @@ var Firmata$1 = /*#__PURE__*/function (_EventEmitter) {
     _this.settings = settings;
     _this.pending = 0;
     _this.digitalPortQueue = 0x0000;
-    if (_typeof$2(port) === "object") {
+    if (_typeof$1(port) === "object") {
       _this.transport = port;
     } else {
       if (!Transport) {
@@ -5197,7 +4631,7 @@ var Firmata$1 = /*#__PURE__*/function (_EventEmitter) {
    * @param {function} callback A function to be called when the arduino has reported its version.
    */
   _inherits(Firmata, _EventEmitter);
-  return _createClass$1(Firmata, [{
+  return _createClass(Firmata, [{
     key: "reportVersion",
     value: function reportVersion(callback) {
       this.once("reportversion", callback);
@@ -5265,7 +4699,7 @@ var Firmata$1 = /*#__PURE__*/function (_EventEmitter) {
   }, {
     key: "servoConfig",
     value: function servoConfig(pin, min, max) {
-      if (_typeof$2(pin) === "object" && pin !== null) {
+      if (_typeof$1(pin) === "object" && pin !== null) {
         var temp = pin;
         pin = temp.pin;
         min = temp.min;
@@ -5495,7 +4929,7 @@ var Firmata$1 = /*#__PURE__*/function (_EventEmitter) {
       if (typeof options === "number") {
         delay = options;
       } else {
-        if (_typeof$2(options) === "object" && options !== null) {
+        if (_typeof$1(options) === "object" && options !== null) {
           delay = Number(options.delay);
 
           // When an address was explicitly specified, there may also be
@@ -6289,7 +5723,7 @@ var Firmata$1 = /*#__PURE__*/function (_EventEmitter) {
       var txPin;
 
       /* istanbul ignore else */
-      if (_typeof$2(options) === "object" && options !== null) {
+      if (_typeof$1(options) === "object" && options !== null) {
         portId = options.portId;
         baud = options.baud;
         rxPin = options.rxPin;
@@ -9409,7 +8843,7 @@ function requireMs() {
 
   ms = function ms(val, options) {
     options = options || {};
-    var type = _typeof$2(val);
+    var type = _typeof$1(val);
     if (type === 'string' && val.length > 0) {
       return parse(val);
     } else if (type === 'number' && isFinite(val)) {
@@ -10209,7 +9643,7 @@ SerialPort.prototype.open = function (openCallback) {
  */
 SerialPort.prototype.update = function (options, callback) {
   var _this3 = this;
-  if (_typeof$2(options) !== 'object') {
+  if (_typeof$1(options) !== 'object') {
     throw TypeError('"options" is not an object');
   }
   if (!this.isOpen) {
@@ -10409,7 +9843,7 @@ SerialPort.prototype.close = function (callback, disconnectError) {
  */
 SerialPort.prototype.set = function (options, callback) {
   var _this7 = this;
-  if (_typeof$2(options) !== 'object') {
+  if (_typeof$1(options) !== 'object') {
     throw TypeError('"options" is not an object');
   }
   if (!this.isOpen) {
@@ -10649,8 +10083,8 @@ var debug = browserExports('serialport/binding-abstract');
 var AbstractBinding$1 = /*#__PURE__*/function () {
   function AbstractBinding() {
     var opt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    _classCallCheck$1(this, AbstractBinding);
-    if (_typeof$2(opt) !== 'object') {
+    _classCallCheck(this, AbstractBinding);
+    if (_typeof$1(opt) !== 'object') {
       throw new TypeError('"options" is not an object');
     }
   }
@@ -10662,7 +10096,7 @@ var AbstractBinding$1 = /*#__PURE__*/function () {
    * @returns {Promise} Resolves after the port is opened and configured.
    * @rejects {TypeError} When given invalid arguments, a `TypeError` is rejected.
    */
-  return _createClass$1(AbstractBinding, [{
+  return _createClass(AbstractBinding, [{
     key: "open",
     value: (function () {
       var _open = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime.mark(function _callee(path, options) {
@@ -10675,7 +10109,7 @@ var AbstractBinding$1 = /*#__PURE__*/function () {
               }
               throw new TypeError('"path" is not a valid port');
             case 2:
-              if (!(_typeof$2(options) !== 'object')) {
+              if (!(_typeof$1(options) !== 'object')) {
                 _context.next = 4;
                 break;
               }
@@ -10755,13 +10189,13 @@ var AbstractBinding$1 = /*#__PURE__*/function () {
                 _context3.next = 4;
                 break;
               }
-              throw new TypeError("\"offset\" is not an integer got \"".concat(isNaN(offset) ? 'NaN' : _typeof$2(offset), "\""));
+              throw new TypeError("\"offset\" is not an integer got \"".concat(isNaN(offset) ? 'NaN' : _typeof$1(offset), "\""));
             case 4:
               if (!(typeof length !== 'number' || isNaN(length))) {
                 _context3.next = 6;
                 break;
               }
-              throw new TypeError("\"length\" is not an integer got \"".concat(isNaN(length) ? 'NaN' : _typeof$2(length), "\""));
+              throw new TypeError("\"length\" is not an integer got \"".concat(isNaN(length) ? 'NaN' : _typeof$1(length), "\""));
             case 6:
               debug('read');
               if (!(buffer.length < offset + length)) {
@@ -10840,7 +10274,7 @@ var AbstractBinding$1 = /*#__PURE__*/function () {
         return _regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) switch (_context5.prev = _context5.next) {
             case 0:
-              if (!(_typeof$2(options) !== 'object')) {
+              if (!(_typeof$1(options) !== 'object')) {
                 _context5.next = 2;
                 break;
               }
@@ -10889,7 +10323,7 @@ var AbstractBinding$1 = /*#__PURE__*/function () {
         return _regeneratorRuntime.wrap(function _callee6$(_context6) {
           while (1) switch (_context6.prev = _context6.next) {
             case 0:
-              if (!(_typeof$2(options) !== 'object')) {
+              if (!(_typeof$1(options) !== 'object')) {
                 _context6.next = 2;
                 break;
               }
@@ -11080,7 +10514,7 @@ function attachUsbId(dst, dstKey, id) {
 var lib = /*#__PURE__*/function (_AbstractBinding) {
   function WebSerialBinding(opts) {
     var _this;
-    _classCallCheck$1(this, WebSerialBinding);
+    _classCallCheck(this, WebSerialBinding);
     _this = _callSuper$2(this, WebSerialBinding);
     _this.port = null;
     _this.writeOperation = null;
@@ -11090,7 +10524,7 @@ var lib = /*#__PURE__*/function (_AbstractBinding) {
     return _this;
   }
   _inherits(WebSerialBinding, _AbstractBinding);
-  return _createClass$1(WebSerialBinding, [{
+  return _createClass(WebSerialBinding, [{
     key: "open",
     value: function () {
       var _open = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime.mark(function _callee(path, opts) {
@@ -11534,7 +10968,7 @@ var ArduinoBoard = /*#__PURE__*/function (_EventEmitter) {
    */
   function ArduinoBoard(runtime) {
     var _this;
-    _classCallCheck$1(this, ArduinoBoard);
+    _classCallCheck(this, ArduinoBoard);
     _this = _callSuper$1(this, ArduinoBoard);
     _this.name = 'ArduinoBoard';
 
@@ -11613,7 +11047,7 @@ var ArduinoBoard = /*#__PURE__*/function (_EventEmitter) {
    * @param {Firmata} firmata set it up
    */
   _inherits(ArduinoBoard, _EventEmitter);
-  return _createClass$1(ArduinoBoard, [{
+  return _createClass(ArduinoBoard, [{
     key: "setupFirmata",
     value: function setupFirmata(firmata) {
       var _this2 = this;
@@ -11691,56 +11125,32 @@ var ArduinoBoard = /*#__PURE__*/function (_EventEmitter) {
     )
   }, {
     key: "connectSerial",
-    value: (function () {
-      var _connectSerial = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime.mark(function _callee2(options) {
-        var _this3 = this;
-        var request;
-        return _regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) switch (_context2.prev = _context2.next) {
-            case 0:
-              if (!this.firmata) {
-                _context2.next = 2;
-                break;
-              }
-              return _context2.abrupt("return", Promise.resolve(this));
-            case 2:
-              // already opened
-              this.state = 'portRequesting';
-              _context2.next = 5;
-              return this.openSerialPort(options).then(function (port) {
-                var firmata = new Firmata(port, {
-                  reportVersionTimeout: 0
-                });
-                _this3.setupFirmata(firmata);
-                return new Promise(function (resolve) {
-                  firmata.once('ready', function () {
-                    if (_this3.firmata !== firmata) return;
-                    _this3.onBoarReady();
-                    resolve(_this3);
-                  });
-                });
-              });
-            case 5:
-              request = _context2.sent;
-              return _context2.abrupt("return", request.catch(function (reason) {
-                _this3.releaseBoard();
-                return Promise.reject(reason);
-              }));
-            case 7:
-            case "end":
-              return _context2.stop();
-          }
-        }, _callee2, this);
-      }));
-      function connectSerial(_x2) {
-        return _connectSerial.apply(this, arguments);
-      }
-      return connectSerial;
-    }()
+    value: function connectSerial(options) {
+      if (this.firmata) return Promise.resolve(this); // already opened
+      this.state = 'portRequesting';
+      var thisBoard = this;
+      var request = this.openSerialPort(options).then(function (port) {
+        var firmata = new Firmata(port, {
+          reportVersionTimeout: 0
+        });
+        thisBoard.setupFirmata(firmata);
+        return new Promise(function (resolve) {
+          firmata.once('ready', function () {
+            thisBoard.onBoarReady();
+            resolve(thisBoard);
+          });
+        });
+      });
+      // return Promise.race([request, timeoutReject(this.connectingWaitingTime)])
+      return request.catch(function (reason) {
+        thisBoard.releaseBoard();
+        return Promise.reject(reason);
+      });
+    }
+
     /**
      * Called when a board was ready.
      */
-    )
   }, {
     key: "onBoarReady",
     value: function onBoarReady() {
@@ -11960,7 +11370,7 @@ var ArduinoBoard = /*#__PURE__*/function (_EventEmitter) {
   }, {
     key: "updateDigitalInput",
     value: function updateDigitalInput(pin) {
-      var _this4 = this;
+      var _this3 = this;
       if (typeof this.pins[pin].mode !== 'undefined' && this.pins[pin].mode !== this.firmata.MODES.INPUT && this.pins[pin].mode !== this.firmata.MODES.PULLUP) {
         return Promise.resolve(this.pins[pin].value);
       }
@@ -11969,23 +11379,23 @@ var ArduinoBoard = /*#__PURE__*/function (_EventEmitter) {
       }
       this.pins[pin].updating = true;
       var request = new Promise(function (resolve) {
-        if (_this4.pins[pin].inputBias !== _this4.firmata.MODES.PULLUP) {
-          _this4.pins[pin].inputBias = _this4.firmata.MODES.INPUT;
+        if (_this3.pins[pin].inputBias !== _this3.firmata.MODES.PULLUP) {
+          _this3.pins[pin].inputBias = _this3.firmata.MODES.INPUT;
         }
-        _this4.firmata.pinMode(pin, _this4.pins[pin].inputBias);
-        _this4.firmata.reportDigitalPin(pin, 1);
-        _this4.firmata.once("digital-read-".concat(pin), function (value) {
-          _this4.pins[pin].value = value;
-          _this4.pins[pin].updateTime = Date.now();
-          _this4.firmata.reportDigitalPin(pin, 0);
-          resolve(_this4.pins[pin].value);
+        _this3.firmata.pinMode(pin, _this3.pins[pin].inputBias);
+        _this3.firmata.reportDigitalPin(pin, 1);
+        _this3.firmata.once("digital-read-".concat(pin), function (value) {
+          _this3.pins[pin].value = value;
+          _this3.pins[pin].updateTime = Date.now();
+          _this3.firmata.reportDigitalPin(pin, 0);
+          resolve(_this3.pins[pin].value);
         });
       });
       return Promise.race([request, timeoutReject(this.updateDigitalInputWaitingTime)]).catch(function (reason) {
-        _this4.pins[pin].value = 0;
+        _this3.pins[pin].value = 0;
         return Promise.reject(reason);
       }).finally(function () {
-        _this4.pins[pin].updating = false;
+        _this3.pins[pin].updating = false;
       });
     }
 
@@ -11998,13 +11408,13 @@ var ArduinoBoard = /*#__PURE__*/function (_EventEmitter) {
   }, {
     key: "setInputBias",
     value: function setInputBias(pin, pullUp) {
-      var _this5 = this;
+      var _this4 = this;
       this.pins[pin].inputBias = pullUp ? this.MODES.PULLUP : this.MODES.INPUT;
       return new Promise(function (resolve) {
-        _this5.pinMode(pin, _this5.pins[pin].inputBias);
+        _this4.pinMode(pin, _this4.pins[pin].inputBias);
         setTimeout(function () {
           return resolve();
-        }, _this5.sendingInterval);
+        }, _this4.sendingInterval);
       });
     }
 
@@ -12016,27 +11426,27 @@ var ArduinoBoard = /*#__PURE__*/function (_EventEmitter) {
   }, {
     key: "updateAnalogInput",
     value: function updateAnalogInput(analogPin) {
-      var _this6 = this;
+      var _this5 = this;
       var pin = this.firmata.analogPins[analogPin];
       if (this.pins[pin].updating || this.pins[pin].updateTime && Date.now() - this.pins[pin].updateTime < this.analogReadInterval) {
         return Promise.resolve(this.pins[pin].value);
       }
       this.pins[pin].updating = true;
       var request = new Promise(function (resolve) {
-        _this6.firmata.pinMode(analogPin, _this6.MODES.ANALOG);
-        _this6.firmata.reportAnalogPin(analogPin, 1);
-        _this6.firmata.once("analog-read-".concat(analogPin), function (value) {
-          _this6.pins[pin].value = value;
-          _this6.pins[pin].updateTime = Date.now();
-          _this6.firmata.reportAnalogPin(analogPin, 0);
-          resolve(_this6.pins[pin].value);
+        _this5.firmata.pinMode(analogPin, _this5.MODES.ANALOG);
+        _this5.firmata.reportAnalogPin(analogPin, 1);
+        _this5.firmata.once("analog-read-".concat(analogPin), function (value) {
+          _this5.pins[pin].value = value;
+          _this5.pins[pin].updateTime = Date.now();
+          _this5.firmata.reportAnalogPin(analogPin, 0);
+          resolve(_this5.pins[pin].value);
         });
       });
       return Promise.race([request, timeoutReject(this.updateAnalogInputWaitingTime)]).catch(function (reason) {
-        _this6.pins[pin].value = 0;
+        _this5.pins[pin].value = 0;
         return Promise.reject(reason);
       }).finally(function () {
-        _this6.pins[pin].updating = false;
+        _this5.pins[pin].updating = false;
       });
     }
 
@@ -12050,12 +11460,12 @@ var ArduinoBoard = /*#__PURE__*/function (_EventEmitter) {
   }, {
     key: "digitalWrite",
     value: function digitalWrite(pin, value, enqueue) {
-      var _this7 = this;
+      var _this6 = this;
       return new Promise(function (resolve) {
-        _this7.firmata.digitalWrite(pin, value, enqueue);
+        _this6.firmata.digitalWrite(pin, value, enqueue);
         setTimeout(function () {
           return resolve();
-        }, _this7.sendingInterval);
+        }, _this6.sendingInterval);
       });
     }
 
@@ -12068,12 +11478,12 @@ var ArduinoBoard = /*#__PURE__*/function (_EventEmitter) {
   }, {
     key: "pwmWrite",
     value: function pwmWrite(pin, value) {
-      var _this8 = this;
+      var _this7 = this;
       return new Promise(function (resolve) {
-        _this8.firmata.pwmWrite(pin, value);
+        _this7.firmata.pwmWrite(pin, value);
         setTimeout(function () {
           return resolve();
-        }, _this8.sendingInterval);
+        }, _this7.sendingInterval);
       });
     }
 
@@ -12086,16 +11496,16 @@ var ArduinoBoard = /*#__PURE__*/function (_EventEmitter) {
   }, {
     key: "servoWrite",
     value: function servoWrite() {
-      var _this9 = this;
+      var _this8 = this;
       for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
         args[_key] = arguments[_key];
       }
       return new Promise(function (resolve) {
-        var _this9$firmata;
-        (_this9$firmata = _this9.firmata).servoWrite.apply(_this9$firmata, args);
+        var _this8$firmata;
+        (_this8$firmata = _this8.firmata).servoWrite.apply(_this8$firmata, args);
         setTimeout(function () {
           return resolve();
-        }, _this9.sendingInterval);
+        }, _this8.sendingInterval);
       });
     }
   }], [{
@@ -12124,7 +11534,7 @@ var ArduinoConnector = /*#__PURE__*/function (_EventEmitter) {
    */
   function ArduinoConnector(runtime) {
     var _this;
-    _classCallCheck$1(this, ArduinoConnector);
+    _classCallCheck(this, ArduinoConnector);
     _this = _callSuper(this, ArduinoConnector);
 
     /**
@@ -12159,7 +11569,7 @@ var ArduinoConnector = /*#__PURE__*/function (_EventEmitter) {
    * @returns {ArduinoBoard?} first board which confirmed with options
    */
   _inherits(ArduinoConnector, _EventEmitter);
-  return _createClass$1(ArduinoConnector, [{
+  return _createClass(ArduinoConnector, [{
     key: "findBoard",
     value: function findBoard(options) {
       if (this.boards.length === 0) return;
@@ -12304,7 +11714,7 @@ var ArduinoBlocks = /*#__PURE__*/function () {
    */
   function ArduinoBlocks(runtime) {
     var _this = this;
-    _classCallCheck$1(this, ArduinoBlocks);
+    _classCallCheck(this, ArduinoBlocks);
     /**
      * The Scratch 3.0 runtime.
      * @type {Runtime}
@@ -12345,7 +11755,7 @@ var ArduinoBlocks = /*#__PURE__*/function () {
   /**
    * Update connected board
    */
-  return _createClass$1(ArduinoBlocks, [{
+  return _createClass(ArduinoBlocks, [{
     key: "updateBoard",
     value: function updateBoard() {
       if (this.board && this.board.isConnected()) return;
@@ -12847,7 +12257,7 @@ var ArduinoBlocks = /*#__PURE__*/function () {
       if (args.PIN === '') return Promise.resolve('pin not assigned');
       var pin = parseInt(Cast$1.toNumber(args.PIN), 10);
       var value = Cast$1.toNumber(args.VALUE);
-      log$2.debug("setPinValuePwm(arg.PIN=".concat(args.PIN, ", arg.VALUE=").concat(args.VALUE, ") => setPinValuePwm(").concat(pin, ", ").concat(value, ")"));
+      console.debug("setPinValuePwm(arg.PIN=".concat(args.PIN, ", arg.VALUE=").concat(args.VALUE, ") => setPinValuePwm(").concat(pin, ", ").concat(value, ")"));
       return this.board.setPinValuePwm(pin, value);
     }
 

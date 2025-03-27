@@ -1,7 +1,6 @@
 import BlockType from '../../extension-support/block-type';
 import ArgumentType from '../../extension-support/argument-type';
 import Cast from '../../util/cast';
-import log from '../../util/log';
 import translations from './translations.json';
 import blockIcon from './block-icon.png';
 import {ArduinoConnector, getArduinoConnector} from './arduino-connector';
@@ -597,7 +596,9 @@ class ArduinoBlocks {
         if (args.PIN === '') return Promise.resolve('pin not assigned');
         const pin = parseInt(Cast.toNumber(args.PIN), 10);
         const value = Cast.toNumber(args.VALUE);
-        log.debug(`setPinValuePwm(arg.PIN=${args.PIN}, arg.VALUE=${args.VALUE}) => setPinValuePwm(${pin}, ${value})`);
+        console.debug(
+            `setPinValuePwm(arg.PIN=${args.PIN}, arg.VALUE=${args.VALUE}) => setPinValuePwm(${pin}, ${value})`
+        );
         return this.board.setPinValuePwm(pin, value);
     }
 
