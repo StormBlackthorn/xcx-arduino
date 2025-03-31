@@ -474,6 +474,9 @@ class ArduinoBoard extends EventEmitter{
      */
     updateAnalogInput (analogPin) {
         const pin = this.firmata.analogPins[analogPin];
+        if (typeof this.pins[pin] === 'undefined') {
+            return Promise.resolve(0);
+        }
         if (this.pins[pin].updating ||
              (this.pins[pin].updateTime &&
                 ((Date.now() - this.pins[pin].updateTime) < this.analogReadInterval))) {
