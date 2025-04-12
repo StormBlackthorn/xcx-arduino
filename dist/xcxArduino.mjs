@@ -19,7 +19,7 @@ var translations$1 = {
 	ja: ja$1,
 	"ja-Hira": {
 	"xcxArduino.entry.name": "Arduino",
-	"xcxArduino.entry.description": "Arduinoであそぶ"
+	"xcxArduino.entry.description": "Arduino で あそぶ"
 }
 };
 
