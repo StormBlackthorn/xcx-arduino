@@ -1,14 +1,19 @@
 # Arduino
-An example extension for [Xcratch](https://xcratch.github.io/)
+An Arduino extension for [Xcratch](https://xcratch.github.io/)
 
-This extension add extra-block "do it", that executes string in its input field as a sentence in Javascript and return the result.
-
+This extension adds blocks to interact with Arduino boards connected via USB, allowing you to read sensor values and control actuators directly from Xcratch projects.
 
 ## ✨ What You Can Do With This Extension
 
-Play [Example Project](https://xcratch.github.io/editor/#https://yokobond.github.io/xcx-arduino/projects/example.sb3) to look at what you can do with "Arduino" extension. 
-<iframe src="https://xcratch.github.io/editor/player#https://yokobond.github.io/xcx-arduino/projects/example.sb3" width="540px" height="460px"></iframe>
+*   **Read Analog Inputs:** Get values from analog sensors connected to pins A0-A5.
+*   **Read Digital Inputs:** Detect if a digital pin is HIGH or LOW.
+*   **Control Digital Outputs:** Set digital pins HIGH or LOW to control LEDs, relays, etc.
+*   **Set Input Bias:** Configure digital input pins with internal pull-up resistors.
+*   **Control PWM Outputs:** Set the duty cycle of PWM pins to control motor speed or LED brightness.
+*   **Control Servo Motors:** Set the angle of standard servo motors connected to digital pins.
 
+Play [Example Project](https://xcratch.github.io/editor/#https://yokobond.github.io/xcx-arduino/projects/example.sb3) to look at what you can do with the "Arduino" extension.
+<iframe src="https://xcratch.github.io/editor/player#https://yokobond.github.io/xcx-arduino/projects/example.sb3" width="540px" height="460px"></iframe>
 
 ## How to Use in Xcratch
 
@@ -72,4 +77,4 @@ Open this page from [https://yokobond.github.io/xcx-arduino/](https://yokobond.g
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/yokobond/xcx-arduino/issues). 
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/yokobond/xcx-arduino/issues).
