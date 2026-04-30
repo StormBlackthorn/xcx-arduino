@@ -11576,7 +11576,9 @@ var ArduinoConnector = /*#__PURE__*/function (_EventEmitter) {
     key: "findBoard",
     value: function findBoard(options) {
       if (this.boards.length === 0) return;
-      if (!options || !options.filters) return this.boards[0];
+      if (!options || !options.filters) return this.boards.find(function (aBoard) {
+        return aBoard.isConnected();
+      });
       return this.boards.find(function (aBoard) {
         return aBoard.isConnected() && options.filters.some(function (filter) {
           return filter.usbVendorId === aBoard.portInfo.usbVendorId && filter.usbProductId === aBoard.portInfo.usbProductId;
@@ -11605,7 +11607,7 @@ var ArduinoConnector = /*#__PURE__*/function (_EventEmitter) {
       var indexOfRemoval = this.boards.indexOf(removal);
       if (indexOfRemoval < 0) return; // not found
       this.boards.splice(indexOfRemoval, 1);
-      this.emit(ArduinoConnector.BOARD_ADDED, removal);
+      this.emit(ArduinoConnector.BOARD_REMOVED, removal);
     }
 
     /**

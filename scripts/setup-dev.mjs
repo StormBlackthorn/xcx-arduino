@@ -2,7 +2,7 @@
 'use strict'
 
 import path from 'path';
-import fs from 'fs-extra';
+import fs from 'node:fs';
 
 // modify for your environment
 const vmSrcDev = path.resolve(process.cwd(), './src/vm');
@@ -14,6 +14,8 @@ const vmRefs = [
 
 // Make symbolic link
 const makeSymbolicLink = function (to, from) {
+    const linkType = process.platform === 'win32' ? 'junction' : 'dir';
+
     try {
         const stats = fs.lstatSync(from);
         if (stats.isSymbolicLink()) {
@@ -28,7 +30,7 @@ const makeSymbolicLink = function (to, from) {
     } catch (err) {
         // File not exists.
     }
-    fs.symlinkSync(to, from, 'dir');
+    fs.symlinkSync(to, from, linkType);
     console.log(`Make link: ${from} -> ${fs.readlinkSync(from)}`);
 }
 
