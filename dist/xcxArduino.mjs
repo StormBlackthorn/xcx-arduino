@@ -11126,26 +11126,30 @@ var ArduinoBoard = /*#__PURE__*/function (_EventEmitter) {
   }, {
     key: "connectSerial",
     value: function connectSerial(options) {
-      if (this.firmata) return Promise.resolve(this); // already opened
-      this.state = 'portRequesting';
-      var thisBoard = this;
-      var request = this.openSerialPort(options).then(function (port) {
-        var firmata = new Firmata(port, {
-          reportVersionTimeout: 0
-        });
-        thisBoard.setupFirmata(firmata);
-        return new Promise(function (resolve) {
-          firmata.once('ready', function () {
-            thisBoard.onBoarReady();
-            resolve(thisBoard);
-          });
-        });
-      });
-      // return Promise.race([request, timeoutReject(this.connectingWaitingTime)])
-      return request.catch(function (reason) {
-        thisBoard.releaseBoard();
-        return Promise.reject(reason);
-      });
+       if (this.firmata) return Promise.resolve(this); // already opened
+        this.state = 'portRequesting';
+        const thisBoard = this;
+        console.log("running this")
+        const request = this.openSerialPort(options)
+            .then(port => {
+                const firmata = new Firmata(port, {reportVersionTimeout: 0});
+                thisBoard.setupFirmata(firmata);
+                console.log("running that")
+                return new Promise(resolve => {
+                    console.log("promise resolved")
+                    firmata.once('ready', () => {
+                        console.log("ready")
+                        thisBoard.onBoarReady();
+                        resolve(thisBoard);
+                    });
+                });
+            });
+        // return Promise.race([request, timeoutReject(this.connectingWaitingTime)])
+        return request
+            .catch(reason => {
+                thisBoard.releaseBoard();
+                return Promise.reject(reason);
+            });
     }
 
     /**
