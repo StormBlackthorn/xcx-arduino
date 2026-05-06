@@ -6,7 +6,7 @@ import fs from 'node:fs';
 
 // modify for your environment
 const vmSrcDev = path.resolve(process.cwd(), './src/vm');
-const vmSrcOrg = path.resolve(process.cwd(), '../scratch-vm/src');
+const vmSrcOrg = path.resolve(process.cwd(), './scratch-vm/src');
 const vmRefs = [
     'extension-support',
     'util',

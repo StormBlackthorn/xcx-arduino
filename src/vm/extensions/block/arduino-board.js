@@ -184,7 +184,7 @@ class ArduinoBoard extends EventEmitter{
         // }
         SerialPort.Binding = WSABinding;
         const port = new SerialPort(nativePort, {
-            baudRate: 57600, // default baud rate for firmata
+            baudRate: 115200, // default baud rate for firmata
             autoOpen: true
         });
         this.portInfo = port.path.getInfo();
