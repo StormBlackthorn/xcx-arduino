@@ -9478,7 +9478,7 @@ var FLOWCONTROLS = Object.freeze(['xon', 'xoff', 'xany', 'rtscts']);
 var defaultSettings = Object.freeze({
   autoOpen: true,
   endOnClose: false,
-  baudRate: 9600,
+  baudRate: 57600,
   dataBits: 8,
   hupcl: true,
   lock: true,
@@ -9522,7 +9522,7 @@ function allocNewReadPool(poolSize) {
 /**
  * @typedef {Object} openOptions
  * @property {boolean} [autoOpen=true] Automatically opens the port on `nextTick`.
- * @property {number=} [baudRate=9600] The baud rate of the port to be opened. This should match one of the commonly available baud rates, such as 110, 300, 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, or 115200. Custom rates are supported best effort per platform. The device connected to the serial port is not guaranteed to support the requested baud rate, even if the port itself supports that baud rate.
+ * @property {number=} [baudRate=57600] The baud rate of the port to be opened. This should match one of the commonly available baud rates, such as 110, 300, 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, or 115200. Custom rates are supported best effort per platform. The device connected to the serial port is not guaranteed to support the requested baud rate, even if the port itself supports that baud rate.
  * @property {number} [dataBits=8] Must be one of these: 8, 7, 6, or 5.
  * @property {number} [highWaterMark=65536] The size of the read and write buffers defaults to 64k.
  * @property {boolean} [lock=true] Prevent other processes from opening the port. Windows does not currently support `false`.
@@ -11143,7 +11143,7 @@ var ArduinoBoard = /*#__PURE__*/function (_EventEmitter) {
               // }
               SerialPort$1.Binding = WSABinding;
               port = new SerialPort$1(nativePort, {
-                baudRate: 115200,
+                baudRate: 57600,
                 // default baud rate for firmata
                 autoOpen: true
               });
