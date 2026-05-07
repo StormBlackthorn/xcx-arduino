@@ -727,7 +727,7 @@ var en = {
 	"xcxArduino.getDigitalLevel": "D[PIN]",
 	"xcxArduino.setInputBias": "Set D[PIN] input bias [BIAS]",
 	"xcxArduino.setDigitalLevel": "Set D[PIN] to [LEVEL]",
-	"xcxArduino.setAnalogLevel": "PWM [PIN] set duty cycle [LEVEL]%",
+	"xcxArduino.setAnalogLevel": "Analog [PIN] set power [LEVEL]%",
 	"xcxArduino.servoTurn": "Servo [PIN] turn [ANGLE] degrees",
 	"xcxArduino.digitalValueMenu.Low": "0",
 	"xcxArduino.digitalValueMenu.High": "1",
@@ -9478,7 +9478,7 @@ var FLOWCONTROLS = Object.freeze(['xon', 'xoff', 'xany', 'rtscts']);
 var defaultSettings = Object.freeze({
   autoOpen: true,
   endOnClose: false,
-  baudRate: 57600,
+  baudRate: 9600,
   dataBits: 8,
   hupcl: true,
   lock: true,
@@ -9522,7 +9522,7 @@ function allocNewReadPool(poolSize) {
 /**
  * @typedef {Object} openOptions
  * @property {boolean} [autoOpen=true] Automatically opens the port on `nextTick`.
- * @property {number=} [baudRate=57600] The baud rate of the port to be opened. This should match one of the commonly available baud rates, such as 110, 300, 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, or 115200. Custom rates are supported best effort per platform. The device connected to the serial port is not guaranteed to support the requested baud rate, even if the port itself supports that baud rate.
+ * @property {number=} [baudRate=9600] The baud rate of the port to be opened. This should match one of the commonly available baud rates, such as 110, 300, 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, or 115200. Custom rates are supported best effort per platform. The device connected to the serial port is not guaranteed to support the requested baud rate, even if the port itself supports that baud rate.
  * @property {number} [dataBits=8] Must be one of these: 8, 7, 6, or 5.
  * @property {number} [highWaterMark=65536] The size of the read and write buffers defaults to 64k.
  * @property {boolean} [lock=true] Prevent other processes from opening the port. Windows does not currently support `false`.
@@ -11995,7 +11995,7 @@ var ArduinoBlocks = /*#__PURE__*/function () {
           blockType: BlockType$1.COMMAND,
           text: formatMessage({
             id: 'xcxArduino.setAnalogLevel',
-            default: 'PWM [PIN] set duty cycle [LEVEL] %',
+            default: 'Analog [PIN] set power [LEVEL] %',
             description: 'set analog level of the pin'
           }),
           arguments: {
