@@ -11172,17 +11172,13 @@ var ArduinoBoard = /*#__PURE__*/function (_EventEmitter) {
       if (this.firmata) return Promise.resolve(this); // already opened
       this.state = 'portRequesting';
       var thisBoard = this;
-      console.log("running this");
       var request = this.openSerialPort(options).then(function (port) {
         var firmata = new Firmata(port, {
           reportVersionTimeout: 0
         });
         thisBoard.setupFirmata(firmata);
-        console.log("running that");
         return new Promise(function (resolve) {
-          console.log("promise resolved");
           firmata.once('ready', function () {
-            console.log("ready");
             thisBoard.onBoarReady();
             resolve(thisBoard);
           });

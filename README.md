@@ -31,6 +31,21 @@ https://yokobond.github.io/xcx-arduino/dist/xcxArduino.mjs
 
 ## Development
 
+## Arduino Firmware
+make sure that it is on a Firmata firmware. To flash it, go to the Arduino IDE.
+Go to `Examples > Firmata > StandardFirmata` and upload it to your board.
+
+Confirm the baud rate of your board. Default is 57600, but modern boards may be set to 115200. To change it, go to line 186-189 in arduino-board.js
+```js
+const port = new SerialPort(nativePort, {
+    baudRate: 57600, // default baud rate for firmata
+    autoOpen: true
+});
+```
+
+NOTE: The bundled xcxArduino.mjs file will have some places have the bud rate be 9600 without any ways of changing it in the source code. Please update these values to the specified baudrate manually or the extension won't be able to find the board.
+
+
 ### Install Dependencies
 
 ```sh
@@ -51,6 +66,11 @@ Run build script to bundle this extension into a module file which could be load
 
 ```sh
 npm run build
+```
+
+If you get a babel warning, you may have to run
+```sh
+npm install @babel/runtime --save
 ```
 
 ### Watch and Bundle

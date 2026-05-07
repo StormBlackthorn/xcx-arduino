@@ -200,16 +200,12 @@ class ArduinoBoard extends EventEmitter{
         if (this.firmata) return Promise.resolve(this); // already opened
         this.state = 'portRequesting';
         const thisBoard = this;
-        console.log("running this")
         const request = this.openSerialPort(options)
             .then(port => {
                 const firmata = new Firmata(port, {reportVersionTimeout: 0});
                 thisBoard.setupFirmata(firmata);
-                console.log("running that")
                 return new Promise(resolve => {
-                    console.log("promise resolved")
                     firmata.once('ready', () => {
-                        console.log("ready")
                         thisBoard.onBoarReady();
                         resolve(thisBoard);
                     });
