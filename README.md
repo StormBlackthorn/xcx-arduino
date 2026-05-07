@@ -43,9 +43,6 @@ const port = new SerialPort(nativePort, {
 });
 ```
 
-NOTE: The bundled xcxArduino.mjs file will have some places have the bud rate be 9600 without any ways of changing it in the source code. Please update these values to the specified baudrate manually or the extension won't be able to find the board.
-
-
 ### Install Dependencies
 
 ```sh

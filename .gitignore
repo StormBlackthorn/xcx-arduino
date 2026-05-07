@@ -5,4 +5,3 @@ src/vm/*
 !src/vm/.*
 
 scratch-vm/*
-!scratch-vm/src/
